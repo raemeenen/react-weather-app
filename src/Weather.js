@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Weather.css";
 
-export default function Weather () {
+export default function Weather (props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   function handleResponse(response) {
     console.log(response.data);
@@ -14,7 +14,7 @@ export default function Weather () {
       date: "Wednesday 8:18",
       humidity: response.data.main.humidity,
       description: response.data.weather[0].description,
-      iconUrl: "https://ssl.gstatic.com/onebox/weather/64/sunny_s_cloudy.png",
+      icon: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
     });
   }
 
@@ -40,7 +40,7 @@ export default function Weather () {
         </div>
         <div className="row">
           <div className="col-6">
-            <img src={weatherData.iconUrl} alt={weatherData.description} />
+            <img src={weatherData.icon} alt={weatherData.description} />
             <span className="temperature">{Math.round(weatherData.temperature)}</span><span className="unit"> °F</span>
           </div>
           <div  className="col-6">
@@ -54,8 +54,7 @@ export default function Weather () {
     )
   } else {
     const apiKey = "3fd0b2514fdddeb5a1773faa623df844";
-    let city = "Kansas City";
-    let apiUrl = ``;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=imperial`;
     axios.get(apiUrl).then(handleResponse);
 
     return "Loading...";
