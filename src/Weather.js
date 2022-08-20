@@ -55,7 +55,7 @@ export default function Weather () {
   } else {
     const apiKey = "3fd0b2514fdddeb5a1773faa623df844";
     let city = "Kansas City";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+    let apiUrl = ``;
     axios.get(apiUrl).then(handleResponse);
 
     return "Loading...";
